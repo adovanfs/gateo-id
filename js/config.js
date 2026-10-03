@@ -6,7 +6,7 @@
 const CONFIG = {
   // URL Web App dari Google Apps Script (setelah di-deploy)
   // Contoh: "https://script.google.com/macros/s/AKfycb.../exec"
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbx4T-dthpR7nH3zKss-9Q_WsD8NKsRZi1fU-_V7FqM/dev",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzZ2_Tuu5PuwME9tC-eyXF7Cq4y-SQYA5QXCY7LytyOCWUI0VjRChJB5mtmXPpccZ-h/exec",
 
   // Password Admin (ganti sesuai keinginanmu)
   // Default: GateO2026
