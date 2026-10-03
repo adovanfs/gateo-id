@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GateO.ID — Kurasi produk pilihan dengan link affiliate Shopee." />
+  <title>GateO.ID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span class="logo-mark">G</span>
+        <span class="logo-text">GateO<span class="logo-dot">.ID</span></span>
+      </a>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+        <button id="admin-trigger" class="icon-btn" aria-label="Admin" title="Admin">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Kurasi Produk Pilihan</h1>
+      <p class="hero-subtitle">Temukan produk terbaik yang sudah diseleksi. Satu klik menuju Shopee.</p>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <section class="controls">
+    <div class="container controls-inner">
+      <div class="search-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="search" id="search-input" placeholder="Cari produk..." autocomplete="off" />
+      </div>
+      <div class="filters">
+        <select id="category-filter">
+          <option value="">Semua Kategori</option>
+        </select>
+        <select id="sort-filter">
+          <option value="newest">Terbaru</option>
+          <option value="price-asc">Harga: Rendah → Tinggi</option>
+          <option value="price-desc">Harga: Tinggi → Rendah</option>
+          <option value="name">Nama A–Z</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <main class="main">
+    <div class="container">
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Memuat produk...</p>
+      </div>
+      <div id="empty" class="empty hidden">
+        <p>Belum ada produk.</p>
+      </div>
+      <div id="products-grid" class="products-grid"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> GateO.ID — Kurasi pribadi.</p>
+    </div>
+  </footer>
+
+  <!-- Admin Modal -->
+  <div id="admin-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Admin Panel</h2>
+        <button id="modal-close" class="icon-btn" aria-label="Tutup">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Login Step -->
+      <div id="admin-login" class="admin-step">
+        <p class="modal-desc">Masukkan password untuk menambah produk.</p>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" placeholder="••••••••" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn btn-primary">Masuk</button>
+          <p id="login-error" class="error-msg hidden">Password salah.</p>
+        </form>
+      </div>
+
+      <!-- Add Product Step -->
+      <div id="admin-form-wrap" class="admin-step hidden">
+        <p class="modal-desc">Tambah produk baru ke GateO.ID</p>
+        <form id="product-form">
+          <div class="form-group">
+            <label for="p-title">Judul Produk *</label>
+            <input type="text" id="p-title" required placeholder="Contoh: iPhone 16 Pro Max 256GB" />
+          </div>
+          <div class="form-group">
+            <label for="p-link">Link Affiliate Shopee *</label>
+            <input type="url" id="p-link" required placeholder="https://s.shopee.co.id/..." />
+          </div>
+          <div class="form-group">
+            <label for="p-image">URL Gambar</label>
+            <input type="url" id="p-image" placeholder="https://..." />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="p-price">Harga</label>
+              <input type="text" id="p-price" placeholder="Rp 1.299.000" />
+            </div>
+            <div class="form-group">
+              <label for="p-category">Kategori</label>
+              <input type="text" id="p-category" placeholder="Elektronik, Fashion, dll" list="category-list" />
+              <datalist id="category-list"></datalist>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="p-desc">Deskripsi Singkat</label>
+            <textarea id="p-desc" rows="3" placeholder="Keunggulan singkat produk..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="logout-btn" class="btn btn-ghost">Keluar</button>
+            <button type="submit" class="btn btn-primary" id="submit-product">Tambah Produk</button>
+          </div>
+          <p id="form-status" class="status-msg hidden"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
